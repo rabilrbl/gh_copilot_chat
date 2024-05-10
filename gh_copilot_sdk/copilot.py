@@ -1,8 +1,14 @@
 import aiohttp
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 class Copilot:
-    def __init__(self, token):
+    def __init__(self, token=os.environ.get("GH_TOKEN")):
+        if not token:
+            raise ValueError("GH_TOKEN environment variable is not set")
         self.token = token
         self.session = None
         self.headers = {
@@ -58,4 +64,3 @@ class Copilot:
             json=data,
         ) as response:
             return await response.json()
-

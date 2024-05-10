@@ -1,13 +1,10 @@
-from gh_copilot_sdk.copilot import Copilot
+from gh_copilot_sdk import Copilot
 import asyncio
-import json, os
-from dotenv import load_dotenv
-
-load_dotenv()
+import json
 
 
-async def main():
-    async with Copilot(os.environ.get("GH_TOKEN")) as cp:
+async def run():
+    async with Copilot() as cp:
         thread_id = await cp.new_chat()
         print("-----")
         while True:
@@ -30,8 +27,5 @@ async def main():
         await cp.generate_title(thread_id)
     return True
 
-
-async def run():
-    return await main()
 
 asyncio.run(run())
