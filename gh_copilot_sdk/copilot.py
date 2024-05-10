@@ -64,3 +64,10 @@ class Copilot:
             json=data,
         ) as response:
             return await response.json()
+        
+    async def get_all_threads(self):
+        async with self.session.get(
+            "https://api.githubcopilot.com/github/chat/threads",
+            headers=self.headers,
+        ) as response:
+            return await response.json()
