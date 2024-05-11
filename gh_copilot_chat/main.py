@@ -1,4 +1,4 @@
-from gh_copilot_sdk import Copilot
+from gh_copilot_chat import Copilot
 import asyncio
 import json
 
