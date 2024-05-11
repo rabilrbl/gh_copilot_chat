@@ -6,10 +6,13 @@ on:
       - main
 
 jobs:
-  tag:
+  package:
     runs-on: ubuntu-latest
     permissions: 
         contents: write
+    environment:
+      name: "PyPI"
+      url: https://pypi.org/project/gh_copilot_chat/
     steps:
       - uses: actions/checkout@v4
 
