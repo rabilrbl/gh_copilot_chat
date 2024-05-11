@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gh_copilot_chat"
-version = "2024.05.11.0432"
+version = "2024.05.11.0433"
 description = "API Wrapper for GitHub Copilot Chat"
 authors = ["Mohammed Rabil <rabil@email.com>"]
 readme = "README.md"
