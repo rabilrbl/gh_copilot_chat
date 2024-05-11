@@ -30,3 +30,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create v$(date +'%Y.%m.%d.%H%M') -t v$(date +'%Y.%m.%d.%H%M') --generate-notes
+
+      - name: Publish to PyPI
+        if: success()
+        uses: JRubics/poetry-publish@v2.0
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
