@@ -1,4 +1,4 @@
-name: Generate Release Tag
+name: Publish Package
 
 on:
   push:
