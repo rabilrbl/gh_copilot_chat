@@ -1,0 +1,30 @@
+name: Generate Release Tag
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Release Tag
+        id: tag
+        run: echo "name=tag::v$(date +'%Y.%m.%d.%H%M')" >> $GITHUB_OUTPUT
+
+      - name: Sync Pyproject.toml
+        run: |
+          sed -i "s/version = .*/version = \"$(date +'%Y.%m.%d.%H%M')\"/g" pyproject.toml
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add pyproject.toml
+          git commit -m "Update version to $(date +'%Y.%m.%d.%H%M')"
+          git push
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create v$(date +'%Y.%m.%d.%H%M') -t v$(date +'%Y.%m.%d.%H%M') --generate-notes
